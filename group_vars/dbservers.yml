@@ -1,0 +1,3 @@
+---
+user_name: dbservers
+COMM: This is variable from group-vars/dbservers.yml

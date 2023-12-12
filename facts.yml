@@ -1,0 +1,54 @@
+---
+- name: Gather all the facts from remote-host
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Print OS name
+      debug:
+        var: ansible_distribution
+    - name: Print date
+      debug:
+        var: ansible_date_time["date"]
+    - name: Print RAM
+      debug:
+        var: ansible_memory_mb["real"]["free"]
+    - name: Install a service httpd
+      yum:
+        name: httpd
+        state: present
+      when: ansible_distribution == "CentOS"
+
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: latest
+        update_cache: yes
+      when: ansible_facts["distribution"]  == "Ubuntu" 
+      register: apachout     
+
+    - name: Start httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes  
+      register: serviceout
+      when: ansible_distribution == "CentOS"   
+
+    - name: Register and print
+      debug:
+        var:
+          serviceout.name
+      when: ansible_distribution == "CentOS" 
+
+    - name: Start apache2 service
+      service:
+        name: apache2
+        state: started
+      register: service2out
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Register and print
+      debug:
+        var:
+          service2out.name
+      when: ansible_distribution == "Ubuntu"

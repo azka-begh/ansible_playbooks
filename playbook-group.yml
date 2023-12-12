@@ -1,0 +1,72 @@
+---
+- name: Understanding vars
+  hosts: web1
+  tasks:
+    - name: create user
+      ansible.builtin.user:
+        name: "{{user_name}}"
+        comment: "{{COMM}}"
+        state: present
+      register: usrout
+
+    - name: Print values
+      debug:
+        var: usrout.name
+    - name: Print value of comm
+      debug:
+        var: usrout.comment
+      
+
+    - name: Delete the user created 
+      user:
+        name: "{{user_name}}"
+        comment: "{{COMM}}"
+        state: absent
+
+- name: Understanding vars
+  hosts: web2
+  tasks:
+    - name: create user
+      ansible.builtin.user:
+        name: "{{user_name}}"
+        comment: "{{COMM}}"
+        state: present
+      register: usrout
+
+    - name: Print values
+      debug:
+        var: usrout.name
+
+    - name: Print value of comm
+      debug:
+        var: usrout.comment
+
+    - name: Delete the user created
+      user:
+        name: "{{user_name}}"
+        comment: "{{COMM}}"
+        state: absent
+
+- name: Understanding vars
+  hosts: dbservers
+  tasks:
+    - name: create user
+      ansible.builtin.user:
+        name: "{{user_name}}"
+        comment: "{{COMM}}"
+        state: present
+      register: usrout
+
+    - name: Print values
+      debug:
+        var: usrout.name
+
+    - name: Print value of comm
+      debug:
+        var: usrout.comment
+
+    - name: Delete the user created
+      user:
+        name: "{{user_name}}"
+        comment: "{{COMM}}"
+        state: absent          

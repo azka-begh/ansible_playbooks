@@ -1,0 +1,3 @@
+---
+user_name: alluser
+COMM: This is variable from group-vars/all.yml
