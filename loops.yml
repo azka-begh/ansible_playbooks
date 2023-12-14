@@ -1,0 +1,35 @@
+---
+- name: Create users 
+  hosts: all
+  tasks:
+    - name: Create a user on CentOS
+      user:
+        name: "{{item}}"
+        state: present
+        groups: "wheel"
+      loop: "{{centosloop}}"
+      when: ansible_distribution == "CentOS"
+
+
+    - name: Create a user on Ubuntu
+      user:
+        name: "{{item}}"
+        state: present
+      loop: "{{ubuntuloop}}"
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Delete users from centos
+      user:
+        name: "{{item}}"
+        state: absent
+        groups: "wheel"
+      loop: "{{centosloop}}"
+      when: ansible_distribution == "CentOS"
+
+    - name: Delete Ubuntu users
+      user:
+        name: "{{item}}"
+        state: absent
+          #groups: "time"
+      loop: "{{ubuntuloop}}"
+      when: ansible_distribution == "Ubuntu"

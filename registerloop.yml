@@ -1,0 +1,18 @@
+
+---
+- name: hello
+  hosts: all
+  tasks:
+    - name: register loop output as a variable
+      shell: "echo {{item}}"
+      loop:
+        - "one"
+        - "two"
+        - three
+      register: echo1
+
+    - name: Fail if return code is not 0
+      fail:
+        msg: "The command ({{item.cmd}}) did not have a 0 return code"
+      when: item.rc != 0
+      loop: "{{echo1.results}}"

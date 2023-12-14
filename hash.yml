@@ -1,0 +1,12 @@
+---
+- name: Use dict2items
+  hosts: all
+  tasks:
+    - name: use
+      debug:
+        msg: "{{item.key}} - {{item.value}}"
+      loop: "{{centosloop | dict2items}}" 
+      vars:
+        centosloop:
+          name: azka
+          groups: azka

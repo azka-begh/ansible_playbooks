@@ -1,3 +1,8 @@
 ---
 user_name: dbservers
 COMM: This is variable from group-vars/dbservers.yml
+centosloop:
+  - Azka1
+  - Ibrahim1
+  - Saiba1
+  - Rushdah1

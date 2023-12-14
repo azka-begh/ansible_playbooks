@@ -1,0 +1,23 @@
+---
+- name: Add users
+  hosts: web1
+  tasks:
+     - name: Create users
+       user:
+         name: "{{ item.name }}"
+         state: present
+         groups: "{{ item.groups }}"
+       loop: "{{centosloop}}"
+     - name: Delete users
+       user:
+         name: "{{item.name}}"
+         state: absent
+         groups: "{{item.groups}}"
+       loop: "{{centosloop}}"
+       register: usrout
+
+     - name: Print loop variables
+       debug:
+         var:
+           usrout
+

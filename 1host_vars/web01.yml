@@ -1,0 +1,13 @@
+---
+user_name: web01
+COMM: variables from host_vars/web01.yml
+centoslopp:
+  - Azka
+  - Ibrahim
+  - Saiba
+  - Rushdah
+ubuntuloop:
+  - Lion
+  - Sheep
+  - Kangaroo
+  - Tiger

@@ -1,0 +1,3 @@
+---
+user_name: db01
+COMM: variables from host_vars/db01.yml
