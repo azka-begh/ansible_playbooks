@@ -1,0 +1,41 @@
+
+---
+- name: Plyaing with handlers
+  hosts: all
+  tasks:
+    - name: Install apache on Ubuntu
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install httpd on CentOS
+      yum:
+        name: httpd
+        state: latest
+      when: ansible_distribution == "CentOS"
+
+    - name: Configure Apache
+      template:
+        src: index.html
+        dest: /var/www/html/index.html
+      #notify: 
+          # - Restart the service on CentOS
+          #- Restart the service on Ubuntu   
+      notify: restart needed 
+  handlers:
+    - name: Restart the service on CentOS
+      service:
+        name: httpd
+        state: restarted
+      when: ansible_facts["distribution"] == "CentOS"
+      listen: restart needed
+
+    - name: Restart the service on Ubuntu
+      service:
+        name: apache2
+        state: restarted
+      when: ansible_facts["distribution"] == "Ubuntu"
+      listen: restart needed
+      
+

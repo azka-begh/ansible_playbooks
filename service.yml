@@ -1,0 +1,31 @@
+---
+- name: Install
+  hosts: webservers
+  tasks:
+    - name: Install ntp on Ubuntu
+      apt:
+        name: ntp
+        state: latest
+      when: ansible_facts['distribution'] == "Ubuntu"
+
+    - name: Start ntp on Ubuntu
+      service:
+        name: ntp
+        state: started
+      when: ansible_facts['distribution'] == "Ubuntu"
+
+
+    - name: Install chronyd on CentOS
+      yum:
+        name: chronyd
+        state: latest
+
+      when: ansible_facts['distribution'] == "CentOS"
+
+    - name: Start chronyd on CentOS
+      service:
+        name: chronyd
+        state: started
+      when: ansible_facts['distribution'] == "CentOS"
+
+

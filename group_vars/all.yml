@@ -1,3 +1,8 @@
 ---
 user_name: alluser
 COMM: This is variable from group-vars/all.yml
+
+ntp0: 0.north-america.pool.ntp.org
+ntp1: 1.north-america.pool.ntp.org
+ntp2: 2.north-america.pool.ntp.org
+ntp3: 3.north-america.pool.ntp.org

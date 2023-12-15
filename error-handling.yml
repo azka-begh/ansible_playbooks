@@ -1,0 +1,17 @@
+---
+- name: Error handling using handlers
+  hosts: webservers
+  ignore_errors: yes
+  tasks: 
+     - name: Set a task to fail
+       shell: /bin/false
+
+     - name: Set a task to succeed
+       shell: /bin/true
+       notify: success
+
+
+  handlers:
+    - name: success
+      debug:
+        msg: "This task ran successfully"

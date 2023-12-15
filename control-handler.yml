@@ -1,0 +1,25 @@
+---
+- name: Using flush_handlers option
+  hosts: web1
+  tasks:
+
+    - name: Install httpd server
+      yum:
+        name: httpd
+        state: present
+      delay: 6  
+      notify: Start httpd
+
+    - name: Flush handlers
+      meta: flush_handlers
+
+    - name: Install unzip
+      yum:
+        name: unzip
+        state: latest
+
+  handlers:
+    - name: Start httpd
+      service:
+        name: httpd
+        state: started

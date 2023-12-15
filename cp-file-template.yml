@@ -1,0 +1,24 @@
+---
+- name: Copy, File and Template modules
+  hosts: all
+  tasks:
+    - name: Copy contents to motd
+      copy:
+        content: "#Welcome to Ansible managed node(s)#"
+        dest: /etc/motd
+
+    - name: File module
+      file:
+        path: /etc/motd
+      register: pathout
+      until: "pathout is not failed"
+      retries: 3
+      delay: 3
+        
+    - name: Template module
+      template:
+        src: template/ubuntu_ntp.conf
+        dest: /etc/ntp.conf
+        backup: yes
+      when: ansible_distribution == "Ubuntu"
+
