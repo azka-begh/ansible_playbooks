@@ -1,0 +1,13 @@
+---
+- name: Using variables with handlers
+  hosts: webservers
+  tasks: 
+     - name: Set host variables based on distribution
+       include_vars: "group_vars/{{ansible_facts.distribution}}.yml"
+
+  handlers:
+    - name: Restart web service
+      service:
+        name: "{{web_service_name | default('httpd')}}"
+        state: restarted
+
