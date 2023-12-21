@@ -1,6 +1,6 @@
 ---
 - name: Add users
-  hosts: web1
+  hosts: all
   tasks:
      - name: Create users
        user:
