@@ -1,3 +1,5 @@
+Use this to set up awx: http://vcloud-lab.com/entries/devops/ansible-awx-tower-github-inventory-integration-github-inventory-source
+
 #ansible
 
 ansible-galaxy init role-name
