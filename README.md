@@ -1,6 +1,6 @@
 # Ansible 
 
-### AWSX Set Up
+### AWX Set Up
  [AWS](http://vcloud-lab.com/entries/devops/ansible-awx-tower-github-inventory-integration-github-inventory-source)
 
 ### Ansible CLI 
